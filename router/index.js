@@ -1,9 +1,8 @@
 const router = require('express').Router()
+const Band = require('./band')
+const HomeController = require('../Controllers/controller-home')
 
+router.get('/', HomeController.home)
 
-//home
-// router.get('/', Controller.home)
-// //login
-// router.use()
-//(home.ejs, event.ejs, eventAdd.ejs)
+router.use('/band', Band)
 module.exports = router
