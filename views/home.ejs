@@ -6,9 +6,26 @@
     <title>Event Performance Organanizer</title>
 </head>
 <body>
+    <%-include('./partials/nav')%>
+
     <div style="text-align: center;">
         <h1> Welcome to AE App</h1>
     </div>
+
+    <%if(errors) {%>
+        <p style="color: red;"><%=errors%></p>
+    <%} %>
+
+    <Form action="/home" method="POST">
+        <label > Username</label><br>
+        <input type="text" name="username"><br><br>
+        <label >Password</label><br>
+        <input type="password" name="password"><br><br>
+
+        <input type="submit" value="LOGIN"><br>
+        <a href="/register"> Register</a>
+
+    </Form>
 
 </body>
 </html>

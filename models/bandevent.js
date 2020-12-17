@@ -14,9 +14,34 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   BandEvent.init({
-    queue_perform: DataTypes.INTEGER,
-    eventId: DataTypes.INTEGER,
-    bandId: DataTypes.INTEGER
+    queue_perform: {
+      type: DataTypes.INTEGER,
+      validate:{
+        notEmpty: {
+          msg: `Queue Perform is Required!!`
+        },
+        min:{
+          args: 1,
+          msg: `Minimum queue is 1`
+        }
+      }
+    },
+    eventId: {
+      type: DataTypes.INTEGER,
+      validate:{
+        notEmpty: {
+          msg: `Event id is Required!!`
+        }
+      }
+    },
+    bandId: {
+      type: DataTypes.INTEGER,
+      validate:{
+        notEmpty: {
+          msg: `Event id is Required!!`
+        }
+      }
+    }
   }, {
     sequelize,
     modelName: 'BandEvent',

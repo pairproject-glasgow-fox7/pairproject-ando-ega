@@ -1,4 +1,4 @@
-const { Band } = require('../models')
+const { Band, Event } = require('../models')
 
 class BandController{
     static showBand(req, res){
@@ -70,6 +70,31 @@ class BandController{
         Band.destroy({where:{id}})
         .then(data =>{
             res.redirect('/band')
+        })
+        .catch(err =>{
+            res.send(err)
+        })
+    }
+
+    static seeEvent(req, res){
+        let id = req.params.id
+        Band.findByPk(id, {include: Event})
+        .then(data =>{ 
+            //res.send(data)
+            res.render('seeEvent', {data})
+        })
+        .catch(err =>{
+            res.send(err)
+        })
+    }
+
+    static filter(req, res){
+        Band.moreThanOne()
+        .then(data=>{
+            //res.send(data)
+            res.render('filter', {
+                data
+            })
         })
         .catch(err =>{
             res.send(err)
