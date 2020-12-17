@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Performance Organizer</title>
+</head>
+<body>
+    <%-include('./partials/nav')%>
+    <div style="text-align: center;">
+        <h3>Edit Band</h3>
+    </div>
+
+    <form action="/event/edit/<%= data.id%>" method="POST"> 
+        <label > Event Name</label> <br>
+        <input type="text" name="event_name" value="<%= data.event_name %>"><br><br>
+        <label > Event Location</label> <br>
+        <input type="text" name="event_location" value="<%= data.event_location%>"><br><br>
+        <label > Event Schedule</label><br>
+        <input type="text" name="event_schedule" value="<%= data.event_schedule %>"><br><br>
+        <input type="submit" value="EDIT">
+    </form>
+</body>
+</html>

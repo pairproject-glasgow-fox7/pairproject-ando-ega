@@ -2,8 +2,11 @@
 const {
   Model
 } = require('sequelize');
+
+const {hashPassword} = require('../helper/bcrypt')
+
 module.exports = (sequelize, DataTypes) => {
-  class Event extends Model {
+  class User extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -11,40 +14,51 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      Event.belongsToMany(models.Band, {
-        through : models.BandEvent,
-        foreignKey: 'eventId'
-      })
     }
+
+    
   };
-  Event.init({
-    event_name: {
+  User.init({
+    username: {
       type: DataTypes.STRING,
       validate: {
         notEmpty: {
-          msg: `Event Name is Required!!`
+          msg: `Username is Required!!`
         }
       }
     },
-    event_location: {
+    password: {
       type: DataTypes.STRING,
       validate: {
         notEmpty: {
-          msg: `Event Location is Required!!`
+          msg: `Password is Required!!`
         }
       }
     },
-    event_schedule: {
-      type: DataTypes.DATEONLY,
+    email: {
+    type: DataTypes.STRING,
+    validate: {
+      notEmpty: {
+        msg: `Email is Required!!`
+      }
+    }
+  },
+    role: {
+      type: DataTypes.STRING,
       validate: {
-        notEmpty:{
-          msg: `Event Schedule is Required!!`
+        notEmpty: {
+          msg: `Role is Required!!`
         }
       }
     }
   }, {
     sequelize,
-    modelName: 'Event',
+    modelName: 'User',
   });
-  return Event;
+
+  User.beforeCreate((instance, options)=>{
+    instance.password = hashPassword(instance.password)
+  })
+
+  return User;
 };

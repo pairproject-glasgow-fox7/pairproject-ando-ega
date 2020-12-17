@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Performance Organizer</title>
+</head>
+<body>
+    <%-include('./partials/nav')%>
+    <div style="text-align: center;">
+        <h4> <%= data.event_name%></h4>
+    </div>
+
+    <form action="/event/addBand/<%= data.id %>" method="POST">
+        <label >Band Name</label> <br><br>
+        <select name="bandId">
+            <option value="">--Please Select--</option>
+            <% for(let i = 0; i < temp.length; i++){%>
+                <option value="<%=temp[i].id%>"> <%=temp[i].band_name%></option>
+            <%}%>
+        </select><br><br>
+        <label >Queue Perform</label>
+        <input type="text" name="queue_perform"><br><br>
+
+        <input type="submit" value="ADD">
+    </form><br><br>
+
+    <table border="1" style="margin: 0 auto; width: auto;">
+        <thead>
+            <tr>
+                <th>Band Name</th>
+                <th>Queue Perform</th>
+            </tr>
+        </thead>
+        <tbody>
+                <% for(let j = 0; j < data.Bands.length; j++){ %>
+                <tr>
+                    <td> <%= data.Bands[j].band_name%> </td>
+                    <td><%= data.Bands[j].BandEvent.queue_perform%></td>
+                </tr>
+                <%}%>
+            
+        </tbody>
+    </table>
+
+    
+</body>
+</html>

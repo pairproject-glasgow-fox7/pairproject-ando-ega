@@ -2,6 +2,8 @@
 const {
   Model
 } = require('sequelize');
+
+const Op = require('sequelize').Op
 module.exports = (sequelize, DataTypes) => {
   class Band extends Model {
     /**
@@ -16,14 +18,50 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'bandId'
       })
     }
+
+    band(){
+      if(this.band_member > 1){
+        return `${this.band_name} Band`
+      } else{
+        return `${this.band_name}`
+      }
+    }
+
+    static moreThanOne(){
+      return Band.findAll({where:{band_member: {[Op.gt] : 1} }})
+    }
   };
   Band.init({
-    band_name: DataTypes.STRING,
+    band_name: {
+      type: DataTypes.STRING,
+      validate: {
+        notEmpty:{
+          msg:`Band Name is Required!!`
+        }
+      }
+    },
     band_origin: DataTypes.STRING,
-    band_member: DataTypes.INTEGER
+    band_member: {
+      type: DataTypes.INTEGER,
+      validate: {
+        notEmpty: {
+          msg: `Band Member is Required!!`
+        },
+        min:{
+          args: 1,
+          msg: `Minimum member is 1`
+        }
+      }
+    }
   }, {
     sequelize,
     modelName: 'Band',
   });
+
+  Band.beforeCreate((instance, options)=>{
+    if(!instance.band_origin){
+      instance.band_origin = 'unknown'
+    }
+  })
   return Band;
 };
