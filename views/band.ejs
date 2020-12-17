@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Performance Organizer</title>
+</head>
+<body>
+    <%-include('./partials/nav')%>
+    <div style="text-align: center;">
+        <h2>Band List</h2>
+    </div>
+    <div style="text-align: center;">
+        <a href="/band/addBand"> Add Band</a>
+    </div> <br><br>
+    <div style="text-align: center;">
+        <a href="/band/filter"> Filter</a>
+    </div><br><br>
+    <table border="1" style="width: auto; margin-right: auto; margin-left: auto;">
+        <thead>
+            <tr>
+                <th>Band Name</th>
+                <th>Origin</th>
+                <th>Band Member</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% for(let i = 0; i < data.length; i++){ %>
+                <tr>
+                    <td> <%= data[i].band() %></td>
+                    <td> <%= data[i].band_origin %></td>
+                    <td> <%= member(data[i].band_member) %></td>
+                    <td> <a href="/band/edit/<%= data[i].id %>"> Edit </a> || <a href="/band/delete/<%= data[i].id %>" onclick="return confirm(`Are you sure?`)">DELETE</a> || <a href="/band/seeEvent/<%= data[i].id %>"> See Event</a></td>
+                </tr>
+            <%}%>
+        </tbody>
+    </table>
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Performance Organizer</title>
+</head>
+<body>
+    <%-include('./partials/nav')%>
+    <div>
+        <h3>Please Fill The Form</h3>
+    </div><br>
+
+    <form action="/band/addBand" method="POST">
+        <label> Nama Band</label><br>
+        <input type="text" name="band_name"><br><br>
+        <label > Asal Band</label><br>
+        <input type="text" name="band_origin"><br><br>
+        <label >Band Personil</label><br>
+        <input type="number" name="band_member"><br><br>
+
+        <input type="submit" value="ADD BAND">
+    </form>
+</body>
+</html>

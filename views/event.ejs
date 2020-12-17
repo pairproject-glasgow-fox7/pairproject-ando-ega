@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Performance Organizer</title>
+</head>
+<body>
+    <%-include('./partials/nav')%>
+    <div style="text-align: center;">
+        <h2>Event List</h2>
+    </div>
+
+    <div style="text-align: center;">
+        <a href="/event/addEvent"> ADD EVENT</a>
+    </div><br>
+
+    <table border="1" style="width: auto; margin: 0 auto;">
+        <thead>
+            <tr>
+                <th>Event Name</th>
+                <th>Event Location</th>
+                <th>Event Schedule</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <%for(let i = 0; i < data.length; i++){%>
+                <tr>
+                    <td> <%= data[i].event_name %></td>
+                    <td> <%= data[i].event_location %></td>
+                    <td> <%= data[i].event_schedule %></td>
+                    <td> <a href="/event/edit/<%=data[i].id%>">Edit </a> || <a href="/event/delete/<%=data[i].id%>" onclick="return confirm(`Are you sure?`)">Delete </a> || <a href="/event/addBand/<%=data[i].id%>">Add Band </a> </td>
+                </tr>
+            <%} %>
+        </tbody>
+    </table>
+</body>
+</html>

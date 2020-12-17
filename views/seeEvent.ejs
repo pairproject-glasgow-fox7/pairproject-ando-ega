@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Performance Organizer</title>
+</head>
+<body>
+    <%-include('./partials/nav')%>
+    <div style="text-align: center;">
+        <h2><%=data.band_name%></h2>
+    </div>
+
+    <table border="1" style="width: auto; margin: 0 auto;">
+        <thead>
+            <tr>
+                <th>Event</th>
+                <th>Schedule</th>
+                <th>Location</th>
+                <th>Queue Perform</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% for(let i = 0; i < data.Events.length;i++){%>
+                <tr>
+                    <td><%= data.Events[i].event_name %></td>
+                    <td><%= data.Events[i].event_schedule %></td>
+                    <td><%= data.Events[i].event_location %></td>
+                    <td><%= data.Events[i].BandEvent.queue_perform %></td>
+                </tr>
+            <%}%>
+        </tbody>
+    </table>
+</body>
+</html>
